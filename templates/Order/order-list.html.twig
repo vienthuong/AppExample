@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Order list
+{% endblock %}
+
+{% block body %}
+    <button id="button_print" style="margin: 10px" onclick="printOrderList()">Print order list</button>
+
+    {% include 'Order/order-list-table.html.twig' with orderListConfiguration %}
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        function printOrderList() {
+            window.print();
+        }
+    </script>
+{% endblock %}

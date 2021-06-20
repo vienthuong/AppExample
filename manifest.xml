@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/Framework/App/Manifest/Schema/manifest-1.0.xsd">
+    <meta>
+        <name>AppExample</name>
+        <label>Swag Example App</label>
+        <label lang="de-DE">Swag Beispiel App</label>
+        <description>Example App</description>
+        <description lang="de-DE">Beispiel App</description>
+        <author>shopware2 AG</author>
+        <copyright>(c) by shopware AG</copyright>
+        <version>1.0.0</version>
+        <license>MIT</license>
+    </meta>
+
+    <setup>
+        <registrationUrl>http://myapp.test/registration</registrationUrl> <!-- replace local url with real one -->
+        <secret>143af21f36dda6b4bc40df8cb045616d</secret>
+    </setup>
+
+    <admin>
+        <!-- replace local  urls with real ones -->
+        <action-button action="addOrderList" entity="order" view="detail" url="http://myapp.test/actionbutton/add/orderlist">
+            <label>Add order list</label>
+            <label lang="de-DE">Bestellliste hinzufügen</label>
+        </action-button>
+
+        <module name="orderList" source="http://myapp.test/iframe/orderlist">
+            <label>Order list</label>
+            <label lang="de-DE">Bestellliste</label>
+        </module>
+
+        <main-module source="http://myapp.test/iframe/orderlist"></main-module>
+    </admin>
+
+    <permissions>
+        <create>state_machine_history</create>
+        <read>order</read>
+        <update>order</update>
+        <read>order_line_item</read>
+        <read>state_machine_state</read>
+    </permissions>
+
+    <custom-fields>
+        <custom-field-set>
+            <name>swag_orderlist</name>
+            <label>Order list</label>
+            <related-entities>
+                <order/>
+            </related-entities>
+            <fields>
+                <text-area name="order-list">
+                    <position>1</position>
+                    <label>Order list 3</label>
+                    <label lang="de-DE">Bestellliste</label>
+                </text-area>
+                <int name="test_int_field2">
+                    <label>Test int field2</label>
+                    <label lang="de-DE">Test Ganzzahlenfeld2</label>
+                    <help-text>This is an int field.</help-text>
+                    <help-text lang="de-DE">Dies ist ein int field.</help-text>
+                    <position>1</position>
+                    <steps>2</steps>
+                    <min>0</min>
+                    <max>1</max>
+                    <placeholder>Enter an int...</placeholder>
+                    <required>true</required>
+                </int>
+            </fields>
+        </custom-field-set>
+    </custom-fields>
+
+    <webhooks>
+        <!-- replace local urls with real ones -->
+        <webhook name="checkoutOrderPlaced" url="http://myapp.test/hooks/order/placed" event="checkout.order.placed"/>
+        <webhook name="appLifecycleDeleted" url="http://myapp.test/applifecycle/deleted" event="app.deleted"/>
+    </webhooks>
+</manifest>

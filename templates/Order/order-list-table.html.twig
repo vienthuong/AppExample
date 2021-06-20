@@ -1,0 +1,24 @@
+<table class='sw-text-editor-table' style='border: 1px solid black; border-collapse: collapse;'>
+    <thead class='sw-text-editor-table__head' style='border: 1px solid black; border-collapse: collapse;'>
+        <tr class='sw-text-editor-table__row'>
+            {% for head in orderListConfiguration.header|keys %}
+                <td class='sw-text-editor-table__col' style='border: 1px solid black; border-collapse: collapse;'>
+                    {{ head }}
+                    <div class='sw-text-editor-table__col-selector' contenteditable='false'></div>
+                </td>
+            {% endfor %}
+        </tr>
+    </thead>
+
+    <tbody class='sw-text-editor-table__body'>
+        {% for lineItem in orderListConfiguration.lineItems %}
+            <tr class='sw-text-editor-table__row'>
+                {% for key in orderListConfiguration.header %}
+                    <td class='sw-text-editor-table__col' style='border: 1px solid black; border-collapse: collapse;'>
+                        {{ lineItem[key] }}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
