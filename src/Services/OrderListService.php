@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Vin\ShopwareSdk\Data\Context;
 use Vin\ShopwareSdk\Data\Criteria;
 use Vin\ShopwareSdk\Data\Entity\Order\OrderDefinition;
@@ -13,7 +12,7 @@ use Vin\ShopwareSdk\Data\Filter\EqualsAnyFilter;
 use Vin\ShopwareSdk\Data\Filter\EqualsFilter;
 use Vin\ShopwareSdk\Factory\RepositoryFactory;
 
-class OrderListService extends AbstractController
+class OrderListService
 {
     //Updates an existing order.
     //These steps are necessary because you need to create a new version for each order which you want to edit.
@@ -114,7 +113,7 @@ class OrderListService extends AbstractController
         foreach ($ordersSearchResult->getEntities() as $order) {
             $lineItems = array_merge(
                 $lineItems,
-                $this->mapLineItemsForConfigurationOrderListTable($order)
+                $order->lineItems ? $this->mapLineItemsForConfigurationOrderListTable($order) : []
             );
         }
 
