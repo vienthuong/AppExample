@@ -20,6 +20,18 @@
 
     <admin>
         <!-- replace local  urls with real ones -->
+        <action-button action="notification" entity="order" view="detail" url="http://myapp.test/actionbutton/notification">
+            <label>Notification</label>
+        </action-button>
+        <action-button action="reload" entity="order" view="detail" url="http://myapp.test/actionbutton/reload">
+            <label>Reload</label>
+        </action-button>
+        <action-button action="openModal" entity="order" view="detail" url="http://myapp.test/actionbutton/openModal">
+            <label>Open modal</label>
+        </action-button>
+        <action-button action="openNewTab" entity="order" view="detail" url="http://myapp.test/actionbutton/openNewTab">
+            <label>Open new tab</label>
+        </action-button>
         <action-button action="addOrderList" entity="order" view="detail" url="http://myapp.test/actionbutton/add/orderlist">
             <label>Add order list</label>
             <label lang="de-DE">Bestellliste hinzufügen</label>
@@ -39,6 +51,7 @@
         <update>order</update>
         <read>order_line_item</read>
         <read>state_machine_state</read>
+        <create>notification</create>
     </permissions>
 
     <custom-fields>

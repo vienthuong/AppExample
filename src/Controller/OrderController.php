@@ -64,6 +64,75 @@ class OrderController extends AbstractController
     }
 
     /**
+     * @Route("/actionbutton/notification", name="actionButton.notification", methods={"POST"})
+     */
+    public function notification(): Response
+    {
+        $response = [
+            'actionType' => 'notification',
+            'payload' => [
+                'status' => 'success',
+                'message' => 'This is a successful message',
+            ]
+        ];
+
+        $signature = hash_hmac('sha256', json_encode($response), $_SERVER['SHOP_SECRET']);
+
+        return new Response(json_encode($response), 200, ['shopware-app-signature' => $signature]);
+    }
+
+    /**
+     * @Route("/actionbutton/reload", name="actionButton.reload", methods={"POST"})
+     */
+    public function reload(): Response
+    {
+        $response = [
+            'actionType' => 'reload',
+            'payload' => []
+        ];
+
+        $signature = hash_hmac('sha256', json_encode($response), $_SERVER['APP_SECRET']);
+
+        return new Response(json_encode($response), 200, ['shopware-app-signature' => $signature]);
+    }
+
+    /**
+     * @Route("/actionbutton/openModal", name="actionButton.openModal", methods={"POST"})
+     */
+    public function openModal(): Response
+    {
+        $response = [
+            'actionType' => 'openModal',
+            'payload' => [
+                'iframeUrl' => 'http://myapp.test/iframe/orderlist',
+                'size' => 'large',
+                'expand' => true,
+            ]
+        ];
+
+        $signature = hash_hmac('sha256', json_encode($response), $_SERVER['APP_SECRET']);
+
+        return new Response(json_encode($response), 200, ['shopware-app-signature' => $signature]);
+    }
+
+    /**
+     * @Route("/actionbutton/openNewTab", name="actionButton.openNewTab", methods={"POST"})
+     */
+    public function openNewTab(): Response
+    {
+        $response = [
+            'actionType' => 'openNewTab',
+            'payload' => [
+                'redirectUrl' => 'http://google.com',
+            ]
+        ];
+
+        $signature = hash_hmac('sha256', json_encode($response), $_SERVER['APP_SECRET']);
+
+        return new Response(json_encode($response), 200, ['shopware-app-signature' => $signature]);
+    }
+
+    /**
      * @Route("/actionbutton/add/orderlist", name="actionButton.add.orderList", methods={"POST"})
      * Adds or update an order list with an deep link to an existing order.
      */
